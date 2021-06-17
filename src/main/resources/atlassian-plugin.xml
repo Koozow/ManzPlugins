@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="ManzPlugin"/>
+  <!-- add our web resources -->
+  <web-resource key="ManzPlugin" name="ManzPlugin Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="aptPlugin.css" location="/css/aptPlugin.css"/>
+    <resource type="download" name="aptPlugin.js" location="/js/aptPlugin.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>AptPlugin</context>
+  </web-resource>
+  <servlet name="Issue CRUD" i18n-name-key="issue-crud.name" key="issue-crud" class="manz.servlet.IssueCRUD">
+    <description key="issue-crud.description">Issue CRUD</description>
+    <url-pattern>/issuecrud</url-pattern>
+  </servlet>
+
+  <web-item name="APT" i18n-name-key="apt-sidebar-item.name" key="apt-sidebar-item" section="jira.project.sidebar.plugins.navigation" weight="1000">
+    <description key="apt-sidebar-item.description">APT Sidebar Item</description>
+    <label key="apt-sidebar-item.label"/>
+    <!--<link linkId="apt-sidebar-item-link">/projects/$pathEncodedProjectKey?selectedItem=activeProjectTracking</link> the name after = is coming from location webpanel-->
+    <!--<link linkId="apt-sidebar-item-link">http://localhost:2990/jira/plugins/servlet/issuecrud</link>-->
+    <link linkId="apt-sidebar-item-link">/projects/$pathEncodedProjectKey?selectedItem=activeProjectTracking</link>
+
+</web-item>
+
+
+<web-panel name="aptWebPanel" i18n-name-key="apt-web-panel.name" key="apt-web-panel" location="activeProjectTracking" weight="1000">
+<description key="apt-web-panel.description">APT Panel</description>
+           <!-- <resource name="view" location="http://localhost:2990/jira/plugins/servlet/issuecrud" type="velocity"/>-->
+  <resource name="view" location="templates/panel.vm" type="velocity"/>
+
+
+</web-panel>
+
+
+
+</atlassian-plugin>
