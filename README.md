@@ -1,1 +1,1 @@
-# ManzPlugins
+# ManzPlugin
